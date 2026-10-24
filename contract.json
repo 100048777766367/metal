@@ -1,0 +1,12 @@
+{
+    "contract_id": "bodhi.contract.v1",
+    "genesis_root": "100048777766367/contract",
+    "derived_node": "100048777766367/metal",
+    "role": "APEX_COMMERCIAL_DATA_FOUNDRY",
+    "rules": {
+        "zero_pii": true,
+        "min_packaged_threshold": 10000,
+        "iso_cleanroom_certified": true,
+        "huggingface_dataset_card_compliant": true
+    }
+}
