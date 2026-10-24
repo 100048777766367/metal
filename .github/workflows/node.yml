@@ -1,0 +1,55 @@
+name: Metal Industrial Commercial Foundry Lifecycle
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+  schedule:
+    - cron: '45 */4 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  run-metal-foundry:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. KÉO CODE BẰNG LINUX SHELL GỐC
+      - name: Kéo mã nguồn Metal
+        run: |
+          git clone --depth 1 https://github.com/${{ github.repository }}.git .
+
+      # 2. HẠ TẦNG CI/CD MỚI NHẤT: SETUP-PYTHON V7 & PYTHON 3.14
+      - name: Thiết lập môi trường Python 3.14
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.14'
+
+      # 3. VẬN HÀNH ĐỐC CÔNG METAL KIỂM SOÁT NGƯỠNG 10.000
+      - name: Vận hành Lò Đúc Kim Loại
+        env:
+          REPO_OWNER: ${{ github.repository_owner }}
+        run: python kernel.py
+
+      # 4. LƯU BỂ TÍCH LŨY VÀ THÀNH PHẨM LÊN GITHUB
+      - name: Lưu vết xuất xưởng thương phẩm vào Git
+        run: |
+          git config --global user.name "Metal-Foundry-Bot"
+          git config --global user.email "bot@metal.foundry"
+          
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          
+          TARGET_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+          [ "$TARGET_BRANCH" = "HEAD" ] || [ -z "$TARGET_BRANCH" ] && TARGET_BRANCH="main"
+
+          git fetch origin "$TARGET_BRANCH"
+          git reset origin/"$TARGET_BRANCH"
+          
+          git add -A
+          
+          if ! git diff --staged --quiet; then
+            git commit -m "💎 [Metal Foundry] Tích lũy quặng chuẩn quốc tế & Đúc thành phẩm 10K+ [skip ci]"
+            git push origin "$TARGET_BRANCH"
+          else
+            echo "Lò đúc tĩnh lặng, đang duy trì bể tích lũy."
+          fi
