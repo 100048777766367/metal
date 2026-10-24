@@ -1,0 +1,2 @@
+COMMERCIAL ROYALTY-FREE DATASET LICENSE (V1.0)
+Permitted for unlimited commercial AI training & GraphRAG usage.
