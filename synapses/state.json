@@ -1,7 +1,7 @@
 {
-    "generation_epoch": 106,
-    "last_t": 1795770226,
+    "generation_epoch": 107,
+    "last_t": 1795815481,
     "total_accumulated": 3313,
     "threshold_met": false,
-    "quantum_cid": "a0afe8fcd91915e491665bcced5a52f7eead6267e21a579c95ba6d5acc5e3cf45e8aeb81e0f2ef790a59b6ee01244caaa0dceb13eb9fb8c32d059065159c28ad"
+    "quantum_cid": "9175dddc7428bb6ea4a6e434988426d73f94050a111728b4558969ef0e7f2d3d3d1810c772a784291eb7ee210812d3f912e662afc95fc684cfd926ae7b03957b"
 }
